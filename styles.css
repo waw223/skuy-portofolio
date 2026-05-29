@@ -932,6 +932,14 @@ a:hover{ text-decoration: underline; text-underline-offset: 3px; }
   scrollbar-width: none;
 }
 
+/* Improve touch scrolling and visibility on small devices */
+.customer-scroll{
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 .customer-column .customer-scroll {
   padding-top: 6px;
 }
@@ -948,6 +956,18 @@ a:hover{ text-decoration: underline; text-underline-offset: 3px; }
   transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 720px){
+  /* make customer cards comfortably sized and scrollable on narrow screens */
+  .customer-card{ min-width: 78vw; max-width: 88vw; }
+  .customer-column{ padding-left: 12px; padding-right: 12px; }
+  .customer-scroll{ padding-left: 6vw; padding-right: 6vw; }
+
+  /* ensure thumbnail & youtube thumb images scale properly */
+  .work__thumb--youtube, .work__thumb { min-height: auto; height: auto; }
+  .work__thumb--youtube .work__thumb-img{ width:100%; height:100%; object-fit: cover; display:block; }
+  .work__thumb-img{ max-width:100%; height:auto; display:block; }
 }
 
 .customer-card:hover {
