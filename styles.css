@@ -655,41 +655,55 @@ a:hover{ text-decoration: underline; text-underline-offset: 3px; }
 }
 
 @media (max-width: 720px){
-  /* mobile nav */
   .nav-toggle{ display:flex; }
   .nav{ display: none; }
 
-  /* ensure reels section padding matches site rhythm on small screens */
-  .reels-block{ padding-left:12px; padding-right:12px; padding-top:20px; padding-bottom:20px; }
-  .reels-block__head{ padding-left:12px; padding-right:12px; text-align:center; }
+  /* tighter section padding but allow full-bleed feel */
+  .reels-block{ padding-left:8px; padding-right:8px; padding-top:18px; padding-bottom:18px; }
+  .reels-block__head{ padding-left:8px; padding-right:8px; text-align:center; font-size:1rem; }
 
-  /* keep horizontal scroll functional but hide visual scrollbar; enable snap */
+  /* horizontal scroll remains, but center each card in viewport when snapped */
   .reels-scroll{
     display:flex;
-    gap:12px;
+    gap:14px;
     overflow-x:auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding-bottom: 12px;
-    justify-content: flex-start;
-    padding-left: 12px;
-    padding-right: 12px;
+    align-items: center;
+    /* pad so first/last cards can center in viewport */
+    padding-left: 7vw;
+    padding-right: 7vw;
   }
 
+  /* hide native scrollbar visuals but keep scrolling functional */
   .reels-scroll::-webkit-scrollbar{ height: 0; }
-  .reels-scroll::-webkit-scrollbar-thumb{ background: transparent; }
+  .reels-scroll { scrollbar-width: none; -ms-overflow-style: none; }
 
-  /* hide side borders on small screens to avoid visual clutter */
+  /* hide decorative side borders on small screens */
   .reels-scroll::before, .reels-scroll::after{ display: none; }
 
-  /* larger touch targets and snap-aligned cards */
-  .reel-card{ flex: 0 0 62vw; max-width: 62vw; scroll-snap-align: start; }
-  .reel-card__media{ border-radius: 12px; }
-  .reel-card__btn{ width: 36px; height: 36px; }
-  .reel-card__video{ border-radius: 12px; }
+  /* make each card large and centered (better for portrait phones) */
+  .reel-card{ flex: 0 0 86vw; max-width: 86vw; scroll-snap-align: center; }
 
-  /* slightly larger buttons for easier tapping */
-  .btn{ padding: 10px 12px; border-radius: 12px; }
+  /* make video fill the card and feel more immersive on mobile */
+  .reel-card__media{ display:block; width:100%; height:56vh; max-height:78vh; overflow:hidden; border-radius:14px; }
+  .reel-card__video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* central overlay play button for quick tap-to-play */
+  .reel-card__btn{
+    position: absolute; inset: auto 12px 12px auto; right:12px; bottom:12px;
+    width:44px; height:44px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+    background: rgba(0,0,0,0.45); color:#fff; border: none; font-size:16px;
+  }
+
+  /* ensure large enough tappable controls site-wide */
+  .btn{ padding: 12px 14px; border-radius:12px; }
+
+  /* slightly larger headings on very small screens */
+  @media (max-width: 380px){
+    .reel-card{ flex: 0 0 92vw; max-width:92vw; }
+    .reels-block__head{ font-size: 0.95rem; }
+  }
 
   /* keep embed modal available if needed */
   .embed-modal{ position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; }
