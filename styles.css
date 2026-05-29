@@ -655,73 +655,45 @@ a:hover{ text-decoration: underline; text-underline-offset: 3px; }
 }
 
 @media (max-width: 720px){
+  /* mobile nav */
+  .nav-toggle{ display:flex; }
+  .nav{ display: none; }
+
+  /* ensure reels section padding matches site rhythm on small screens */
+  .reels-block{ padding-left:12px; padding-right:12px; padding-top:20px; padding-bottom:20px; }
+  .reels-block__head{ padding-left:12px; padding-right:12px; text-align:center; }
+
+  /* keep horizontal scroll functional but hide visual scrollbar; enable snap */
   .reels-scroll{
-    justify-content: center;
-    max-width: 100%;
-    margin-inline: 0;
-    gap: 12px;
-    padding-bottom: 2px;
-    flex-wrap: wrap;
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+    justify-content: flex-start;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
-/* Embed modal styles */
-.embed-modal{
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-.embed-modal[aria-hidden="false"]{
-  display: flex;
-}
-.embed-modal__overlay{
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-}
-.embed-modal__panel{
-  position: relative;
-  width: min(760px, 88%);
-  max-width: 760px;
-  aspect-ratio: 16/9;
-  background: #000;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.embed-modal__close{
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 2;
-  background: rgba(255,255,255,0.9);
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 1;
-}
-.embed-modal__content iframe{
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-  .reels-scroll::-webkit-scrollbar{
-    height: 4px;
-  }
-  .reels-scroll::-webkit-scrollbar-thumb{
-    background: var(--border);
-    border-radius: 999px;
-  }
-  .reel-card{
-    flex: 0 0 140px;
-    max-width: 140px;
-    scroll-snap-align: start;
-  }
+  .reels-scroll::-webkit-scrollbar{ height: 0; }
+  .reels-scroll::-webkit-scrollbar-thumb{ background: transparent; }
+
+  /* hide side borders on small screens to avoid visual clutter */
+  .reels-scroll::before, .reels-scroll::after{ display: none; }
+
+  /* larger touch targets and snap-aligned cards */
+  .reel-card{ flex: 0 0 62vw; max-width: 62vw; scroll-snap-align: start; }
+  .reel-card__media{ border-radius: 12px; }
+  .reel-card__btn{ width: 36px; height: 36px; }
+  .reel-card__video{ border-radius: 12px; }
+
+  /* slightly larger buttons for easier tapping */
+  .btn{ padding: 10px 12px; border-radius: 12px; }
+
+  /* keep embed modal available if needed */
+  .embed-modal{ position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; }
+  .embed-modal[aria-hidden="false"]{ display:flex; }
 }
 
 .tiktok-cta{
